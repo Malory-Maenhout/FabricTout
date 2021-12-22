@@ -17,4 +17,20 @@
 		<env-entry-type>java.lang.String</env-entry-type>
 		<env-entry-value>http://localhost:8080/FabricToutAPI/apiRest</env-entry-value>
 	</env-entry>
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>be.fabrictout.servlets.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>HomeServlet</servlet-name>
+		<servlet-class>be.fabrictout.servlets.HomeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HomeServlet</servlet-name>
+		<url-pattern>/Home</url-pattern>
+	</servlet-mapping>
 </web-app>
