@@ -3,6 +3,7 @@ package be.fabrictout.javabeans;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.*;
+import be.fabrictout.dao.MachineDAO;
 
 public class Employee extends User implements Serializable {
 
@@ -35,6 +36,20 @@ public class Employee extends User implements Serializable {
 				active);
 	}
 	
-	//Methodes
+	public Employee(String firstname, String lastname, String address, Date dateOfBirth, char sexe, String city,
+			int postalCode, int phoneNumber, String emailAddress, String personnelNumber, String password, String discriminator, boolean active) {
+		super(firstname, lastname, address, dateOfBirth, sexe, city, postalCode, phoneNumber, emailAddress, personnelNumber, password, discriminator,
+				active);
+	}
 	
+	//Methodes
+	public boolean deleteMachine(Machine deleteMachine) {
+		MachineDAO dao = new MachineDAO();
+		return dao.delete(deleteMachine);
+	}
+	
+	public boolean createMachine(Machine addMachine) {
+		MachineDAO dao = new MachineDAO();
+		return dao.create(addMachine);
+	}
 }

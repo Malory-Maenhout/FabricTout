@@ -3,6 +3,7 @@ package be.fabrictout.javabeans;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.*;
+import be.fabrictout.dao.*;
 
 public class Administrator extends User implements Serializable{
 
@@ -35,6 +36,34 @@ public class Administrator extends User implements Serializable{
 				active);
 	}
 	
-	//Methodes
+	//Methodes	
+	public boolean createUser(int id, User addUser) {
+		UserDAO dao = new UserDAO();
+		return dao.create(id, addUser);
+	}
 	
+	public boolean deleteUser(User deleteUser) {
+		UserDAO dao = new UserDAO();
+		return dao.delete(deleteUser);
+	}
+	
+	public boolean editUser(User editUser) {
+		UserDAO dao = new UserDAO();
+		return dao.update(editUser);
+	}
+	
+	public boolean createSite(Site addSite) {
+		SiteDAO dao = new SiteDAO();
+		return dao.create(addSite);
+	}
+	
+	public void loadSiteList() {
+		SiteDAO dao = new SiteDAO();
+		this.siteList = dao.findAll();
+	}
+	
+	public boolean createArea(int id, Area addArea) {
+		AreaDAO dao = new AreaDAO();
+		return dao.create(id, addArea);
+	}
 }

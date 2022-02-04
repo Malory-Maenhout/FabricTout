@@ -8,9 +8,9 @@ public class Report implements Serializable {
 	//Attributes/Variables
 	private static final long serialVersionUID = -2265362790380307095L;
 	private int id;
+	private Worker worker;
 	private String description;
 	private Date date;
-	private Worker worker;
 
 	//Getters & Setters
 	public int getId() {
@@ -20,6 +20,13 @@ public class Report implements Serializable {
 		this.id = id;
 	}
 
+	public Worker getWorker() {
+		return worker;
+	}
+	public void setWorker(Worker worker) {
+		this.worker = worker;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -34,26 +41,26 @@ public class Report implements Serializable {
 		this.date = date;
 	}
 	
-	public Worker getWorker() {
-		return worker;
-	}
-	public void setWorker(Worker worker) {
-		this.worker = worker;
-	}
-	
 	//Constructor
 	public Report() {
 		super();
 	}
 	
-	public Report(int id, String description, Date date, Worker worker) {
+	public Report(int id, Worker worker, String description, Date date) {
 		super();
 		this.id = id;
+		this.worker = worker;
 		this.description = description;
 		this.date = date;
-		this.worker = worker;
 	}	
 	
+	public Report(Worker worker, String description, Date date) {
+		super();
+		this.worker = worker;
+		this.description = description;
+		this.date = date;
+	}	
+		
 	//Methodes
 	
 }

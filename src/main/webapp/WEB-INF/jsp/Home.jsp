@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="be.fabrictout.javabeans.*" %>
+<%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,9 +18,37 @@
 
 	    <main role="main" class="container">
 	      <div class="starter-template">
-	        <h1>Bootstrap starter template</h1>
-	        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-	      </div>
+
+	        <%
+	        	User user = null;
+	        	switch(discriminator)
+	        	{
+	        		case "ADMIN":
+	        			user = (Administrator) session.getAttribute("user");
+	        			break;
+	        		case "EMPLOYE":
+	        			user = (Employee) session.getAttribute("user");
+	        			break;
+	        		case "MANAGER":
+	        			user = (Manager) session.getAttribute("user");
+	        			break;
+	        		case "WORKER":
+	        			user = (Worker) session.getAttribute("user");
+	        			if((boolean)request.getAttribute("notification"))
+	        			{
+	        				out.println("<div class=\"alert alert-warning\" role=\"alert\">");
+	        				out.println("You have at least one maintenance to do ! <a href=\"Maintenance\" class=\"alert-link\">List of maintenance</a>");
+	        				out.println("</div>");
+	        				out.println("</br>");
+	        			}     			
+	        			break;
+	        	}
+	        %>
+	        
+	        <h1>Welcome to the FabricTout application !</h1>     
+	        <p class="lead">Hello dear <%= user.getLastname()%><br>
+	        You can use the navigation bar to navigate through the application.</p>
+	      </div>		
     	</main>
 	    
 	    <script>

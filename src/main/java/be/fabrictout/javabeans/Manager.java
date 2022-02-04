@@ -3,6 +3,7 @@ package be.fabrictout.javabeans;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.*;
+import be.fabrictout.dao.*;
 
 public class Manager extends User implements Serializable{
 
@@ -35,6 +36,29 @@ public class Manager extends User implements Serializable{
 				active);
 	}
 	
-	//Methodes
+	public Manager(String firstname, String lastname, String address, Date dateOfBirth, char sexe, String city,
+			int postalCode, int phoneNumber, String emailAddress, String personnelNumber, String password, String discriminator, boolean active) {
+		super(firstname, lastname, address, dateOfBirth, sexe, city, postalCode, phoneNumber, emailAddress, personnelNumber, password, discriminator,
+				active);
+	}
 	
+	//Methodes
+	public List<Worker> getWorkerList() {
+		WorkerDAO dao = new WorkerDAO();
+		return dao.findAll(this.getId());
+	}
+	
+	public boolean createMaintenance(int id, Maintenance addMaintenance) {
+		MaintenanceDAO dao = new MaintenanceDAO();
+		return dao.create(id, addMaintenance);
+	}
+	
+	public boolean updateMachine(Machine updateMachine) {
+		MachineDAO dao = new MachineDAO();
+		return dao.update(updateMachine);
+	}
+	public boolean updateMaintenance(Maintenance updateMaintenance) {
+		MaintenanceDAO dao = new MaintenanceDAO();
+		return dao.update(updateMaintenance);
+	}
 }

@@ -2,6 +2,7 @@ package be.fabrictout.javabeans;
 
 import java.io.Serializable;
 import java.util.*;
+import be.fabrictout.dao.AreaDAO;
 import be.fabrictout.enums.ColorEnum;
 
 public class Area implements Serializable {
@@ -61,14 +62,38 @@ public class Area implements Serializable {
 		super();
 	}
 	
-	public Area(int id, char letter, ColorEnum color, String description) {
+	public Area(int id, char letter, String color, String description) {
 		super();
 		this.id = id;
 		this.letter = letter;
-		this.color = color;
+		this.color = switch(color) {
+	        case "Green" -> ColorEnum.Green;
+	        case "Orange" -> ColorEnum.Orange;
+	        case "Red" -> ColorEnum.Red;
+	        case "Black" -> ColorEnum.Black;
+	        default -> ColorEnum.Green;
+		};
 		this.description = description;
 	}
 	
-	//Methodes
+	public Area(char letter, String color, String description) {
+        super();
+
+        this.letter = letter;
+        this.color = switch(color) {
+            case "Green" -> ColorEnum.Green;
+            case "Orange" -> ColorEnum.Orange;
+            case "Red" -> ColorEnum.Red;
+            case "Black" -> ColorEnum.Black;
+            default -> ColorEnum.Green;
+        };
+        this.description = description;
+    }
 	
+	//Methodes
+	public static Area getArea(int id)
+	{
+		AreaDAO dao = new AreaDAO();
+		return dao.find(id);
+	}
 }

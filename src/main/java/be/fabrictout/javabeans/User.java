@@ -1,7 +1,6 @@
 package be.fabrictout.javabeans;
 
 import java.sql.Date;
-
 import be.fabrictout.dao.UserDAO;
 
 public abstract class User {
@@ -144,11 +143,35 @@ public abstract class User {
 		this.discriminator = discriminator;
 		this.active = active;
 	}
+	
+	public User(String firstname, String lastname, String address, Date dateOfBirth, char sexe, String city,
+			int postalCode, int phoneNumber, String emailAddress, String personnelNumber, String password, String discriminator, boolean active) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.address = address;
+		this.dateOfBirth = dateOfBirth;
+		this.sexe = sexe;
+		this.city = city;
+		this.postalCode = postalCode;
+		this.phoneNumber = phoneNumber;
+		this.emailAddress = emailAddress;
+		this.personnelNumber = personnelNumber;
+		this.password = password;
+		this.discriminator = discriminator;
+		this.active = active;
+	}
 
 	//Methodes
 	public static User login(String personnelNumber, String password)
 	{
 		UserDAO dao = new UserDAO();
 		return dao.find(personnelNumber, password);
+	}
+	
+	public static User getUser(int id)
+	{
+		UserDAO dao = new UserDAO();
+		return dao.find(id);
 	}
 }

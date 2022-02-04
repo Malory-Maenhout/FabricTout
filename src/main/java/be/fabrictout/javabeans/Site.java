@@ -2,6 +2,7 @@ package be.fabrictout.javabeans;
 
 import java.io.Serializable;
 import java.util.*;
+import be.fabrictout.dao.SiteDAO;
 
 public class Site implements Serializable{
 
@@ -73,5 +74,16 @@ public class Site implements Serializable{
 		this.country = country;
 	}
 	
+	public Site(String city, String country) {
+		super();
+		this.city = city;
+		this.country = country;
+	}
+	
 	//Methodes
+	public static Site getSite(int id)
+	{
+		SiteDAO dao = new SiteDAO();
+		return dao.find(id);
+	}
 }

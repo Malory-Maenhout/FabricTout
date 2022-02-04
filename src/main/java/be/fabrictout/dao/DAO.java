@@ -1,6 +1,7 @@
 package be.fabrictout.dao;
 
 import java.net.URI;
+import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -40,6 +41,8 @@ public abstract class DAO<T> {
 	}
 
 	public abstract boolean create(T obj);
+	
+	public abstract boolean create(int id, T obj);
 
 	public abstract boolean delete(T obj);
 
@@ -48,4 +51,8 @@ public abstract class DAO<T> {
 	public abstract T find(int id);
 	
 	public abstract T find(String str1, String str2);
+	
+	public abstract List<T> findAll();
+	
+	public abstract List<T> findAll(int id);
 }

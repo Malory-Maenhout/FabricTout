@@ -46,15 +46,13 @@
 			          %>
 				          <div>
 				          	<ul>
-								<%
-									
+								<%	
 										for(String error : errors)
 										{			
 								%>
 											<li><%= this.formatMessage(error)%></li>
 								<% 
 										}
-								
 								%>
 						  	</ul>
 				          </div>
@@ -62,7 +60,7 @@
 							}
 			          %>         
 			          
-			          <button type="submit" name="submit" id="submit" value="Login" class="btn btn-primary">Login</button>
+			          <button type="submit" name="submit" id="submit" value="Login" class="btn btn-primary">Log in</button>
 			      	</form>
 				</div>	 
 			</div>

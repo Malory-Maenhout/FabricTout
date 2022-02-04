@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import be.fabrictout.javabeans.User;
 
 /**
@@ -29,6 +28,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Return login jsp
 		getServletContext().getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
 	}
 
@@ -36,11 +36,14 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Recovery personnelNumber and password
 		String personnelNumberParam = request.getParameter("inputPersonnelNumber");
 		String passwordParam = request.getParameter("inputPassword");
 		
+		//set list of errors
 		ArrayList<String> errors = new ArrayList<String>();
 		
+		//Check if personnelNumber and password are not null or empty
 		if(personnelNumberParam == null)
 		{
 			errors.add("This [personnalNumber] is null!");
@@ -67,22 +70,30 @@ public class LoginServlet extends HttpServlet {
 		
 		if(personnelNumberParam != null && passwordParam != null && errors.size()== 0)
 		{
+			//Check if the user exists and return good jsp
 			User user = User.login(personnelNumberParam, passwordParam);
+			
 			if(user != null)
 			{
+				//create session if the user exists
 				HttpSession session = request.getSession();
+				
 				if(!session.isNew()) 
 				{
 						session.invalidate();
-						session = request.getSession();			
+						session = request.getSession(true);			
 				}
+				
 				session.setAttribute("user", user);	
+				session.setAttribute("discriminator", user.getDiscriminator());
+				
 				response.sendRedirect(request.getContextPath() + "/Home");
 			}
 			else
 			{
 				errors.add("This personnel number or password is wrong!");
 				request.setAttribute("errors", errors);
+				
 				doGet(request, response);
 			}
 		}
@@ -90,6 +101,7 @@ public class LoginServlet extends HttpServlet {
 		{
 			errors.add("This personnel number or password is wrong!");
 			request.setAttribute("errors", errors);
+			
 			doGet(request, response);
 		}
 	}
